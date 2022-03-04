@@ -23,10 +23,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-800">
 
+
+
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-                    
 
                                         
                     <!--Forms Funcionario-->
@@ -48,12 +48,13 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                                        <input type="text" name="nome" id="nome" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md ">    
+                                                        <input type="text" name="nome" id="nome" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">    
                                                     </div>
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
-                                                        <select id="sexo" name="sexo" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="sexo" name="sexo" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="">Selecione</option>
                                                             <option value="Masculino">Masculino</option>
                                                             <option value="Feminino">Feminino</option>
                                                             <option value="Outros">Outros</option>
@@ -67,7 +68,8 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="estado_civil" class="block text-sm font-medium text-gray-700">Estado Civil</label>
-                                                        <select id="estado_civil" name="estado_civil" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="estado_civil" name="estado_civil" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="">Selecione</option>
                                                             <option value="Solteiro">Solteiro</option>
                                                             <option value="Casado">Casado</option>
                                                             <option value="Separado">Separado</option>
@@ -78,7 +80,8 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="telefone" class="block text-sm font-medium text-gray-700">(DDD) + Telefone</label>
-                                                        <input type="tel" name="telefone" id="telefone" placeholder="Ex: (12)34567-8901" maxlength="14" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="tel" name="telefone" id="telefone" placeholder="(12)34567-8901" maxlength="15" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" onkeypress="mask(this, mphone);" onblur="mask(this, mphone);">
+                                                        <small>Preencha apenas com os números.</small>
                                                     </div>
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
@@ -128,11 +131,11 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                                                         <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
-                                                        <select id="pais" name="pais" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                            <option value="Brasil" selected>Brasil</option>
+                                                        <select id="pais" name="pais" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="">Selecione</option>
                                                             <option value="Argentina">Argentina</option>
                                                             <option value="Bolívia">Bolívia</option>
-                                                            <option value="Brasil" selected>Brasil</option>
+                                                            <option value="Brasil"selected>Brasil</option>
                                                             <option value="Chile">Chile</option>
                                                             <option value="Colômbia">Colômbia</option>
                                                             <option value="Equador">Equador</option>
@@ -168,7 +171,8 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="tipo_contratacao" class="block text-sm font-medium text-gray-700">Tipo de Contratação</label>
-                                                        <select id="tipo_contratacao" name="tipo_contratacao" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="tipo_contratacao" name="tipo_contratacao" autofocus="Selecione" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="">Selecione</option>
                                                             <option value="CLT">CLT</option>
                                                             <option value="PJ">PJ</option>
                                                             <option value="Terceirizado">Terceirizado</option>
@@ -207,6 +211,42 @@
                                 {{ __('Cadastrar') }}
                             </x-button>
 
+
+
+
+                                        <!--Script para mascarar campo de telefone-->
+                                        <script type="text/javascript">
+                                            function mask(o, f) {
+                                                setTimeout(function() {
+                                                    var v = mphone(o.value);
+                                                    if (v != o.value) {
+                                                        o.value = v;
+                                                    }
+                                                }, 1);
+                                            }
+
+                                            function mphone(v) {
+                                                var r = v.replace(/\D/g, "");
+                                                r = r.replace(/^0/, "");
+                                                if (r.length > 10) {
+                                                    r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+                                                } else if (r.length > 5) {
+                                                    r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+                                                } else if (r.length > 2) {
+                                                    r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+                                                } else {
+                                                    r = r.replace(/^(\d*)/, "($1");
+                                                }
+                                                return r;
+                                            }
+                                        </script>
+
+
+
+
+
+
+                                        <!--Script de CEP-->
                                         <script type="text/javascript">
 		                                    $("#cep").focusout(function(){
                                                 //Início do Comando AJAX

@@ -32,4 +32,6 @@ class Funcionario extends Model
         'area',
         'salario',
     ];
+
+
 }

@@ -100,7 +100,7 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'The :attribute must be a number.',
-    'password' => 'The password is incorrect.',
+    'password' => 'A senha está incorreta.',
     'present' => 'The :attribute field must be present.',
     'prohibited' => 'The :attribute field is prohibited.',
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
@@ -161,7 +161,9 @@ return [
     'attributes' => [
 
             'nome' => 'Nome Completo',
+            'sexo'=> 'Sexo',
             'data_nascimento' => 'Data de Nascimento',
+            'estado_civil'=>'Estado Civil',
             'telefone' => 'Telefone',
             'email' => 'Email',
             'cep' => 'CEP',
@@ -170,6 +172,8 @@ return [
             'bairro' => 'Bairro',
             'cidade' => 'Cidade',
             'uf' => 'Estado',
+            'pais'=>'País',
+            'tipo_contratacao'=>'Tipo de Contratação',
             'data_admissao' => 'Data de Admissão',
             'cargo' => 'Cargo',
             'area' => 'Área',

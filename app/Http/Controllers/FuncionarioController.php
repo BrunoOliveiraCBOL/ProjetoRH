@@ -13,13 +13,32 @@ class FuncionarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $funcionarios = Funcionario::latest()->paginate(5);
+    {   
+        $funcionarios = Funcionario::latest()->get();
       
         return view('funcionarios.index',compact('funcionarios'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+
+
+                /*
+        $search = request('search');
+
+        if($search){
+
+            $funcionarios = Funcionario::where([
+                ['nome', 'like','%'.$search.'%']
+            ])->get();
+        }else{
+            $funcionarios = Funcionario::all();
+        }
+
+        return view('funcionarios.index',['funcionarios'=> $funcionarios, 'search' => $search]);
+    
+        */
     }
 
+
+        
     /**
      * Show the form for creating a new resource.
      *
@@ -30,6 +49,7 @@ class FuncionarioController extends Controller
         return view('funcionarios.create');
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -40,6 +60,24 @@ class FuncionarioController extends Controller
     {
         $request->validate([
 
+            'nome' => 'required',
+            'sexo' => 'required',
+            'data_nascimento' => 'required',
+            'estado_civil' => 'required',
+            'telefone' => 'required',
+            'email' => 'required',
+            'cep' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'uf' => 'required',
+            'pais' => 'required',
+            'tipo_contratacao' => 'required',
+            'data_admissao' => 'required',
+            'cargo' => 'required',
+            'area' => 'required',
+            'salario' => 'required',
              
         ]);
       
@@ -104,4 +142,9 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios.index')
                         ->with('success','Registro deletado com sucesso');
     }
+   
+
+
 }
+
+
