@@ -36,8 +36,8 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>matricula:</strong>
-                    <textarea class="form-control" style="height:150px" nome="matricula" placeholder="matricula">{{ $funcionario->matricula }}</textarea>
+                    <strong>id:</strong>
+                    <textarea class="form-control" style="height:150px" nome="id" placeholder="id">{{ $funcionario->id }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

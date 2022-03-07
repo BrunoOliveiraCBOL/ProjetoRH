@@ -21,7 +21,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-800">
+                <div class="p-6 bg-white">
 
 
 
@@ -48,12 +48,12 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                                        <input type="text" name="nome" id="nome" autocomplete="off" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">    
+                                                        <input type="text" name="nome" id="nome" autocomplete="off" autofocus="on" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">    
                                                     </div>
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
-                                                        <select id="sexo" name="sexo" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="sexo" name="sexo" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             <option value="">Selecione</option>
                                                             <option value="Masculino">Masculino</option>
                                                             <option value="Feminino">Feminino</option>
@@ -68,7 +68,7 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="estado_civil" class="block text-sm font-medium text-gray-700">Estado Civil</label>
-                                                        <select id="estado_civil" name="estado_civil" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="estado_civil" name="estado_civil" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             <option value="">Selecione</option>
                                                             <option value="Solteiro">Solteiro</option>
                                                             <option value="Casado">Casado</option>
@@ -131,7 +131,7 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                                                         <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
-                                                        <select id="pais" name="pais" autocomplete="off" autofocus="Selecione" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="pais" name="pais" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             <option value="">Selecione</option>
                                                             <option value="Argentina">Argentina</option>
                                                             <option value="Bolívia">Bolívia</option>
@@ -171,7 +171,7 @@
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="tipo_contratacao" class="block text-sm font-medium text-gray-700">Tipo de Contratação</label>
-                                                        <select id="tipo_contratacao" name="tipo_contratacao" autofocus="Selecione" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                        <select id="tipo_contratacao" name="tipo_contratacao" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             <option value="">Selecione</option>
                                                             <option value="CLT">CLT</option>
                                                             <option value="PJ">PJ</option>

@@ -14,27 +14,10 @@ class FuncionarioController extends Controller
      */
     public function index()
     {   
-        $funcionarios = Funcionario::latest()->get();
+        $funcionarios = Funcionario::latest()->paginate();
       
         return view('funcionarios.index',compact('funcionarios'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
-
-
-                /*
-        $search = request('search');
-
-        if($search){
-
-            $funcionarios = Funcionario::where([
-                ['nome', 'like','%'.$search.'%']
-            ])->get();
-        }else{
-            $funcionarios = Funcionario::all();
-        }
-
-        return view('funcionarios.index',['funcionarios'=> $funcionarios, 'search' => $search]);
-    
-        */
     }
 
 
@@ -120,13 +103,13 @@ class FuncionarioController extends Controller
     {
         $request->validate([
             'nome' => 'required',
-            'matricula' => 'required',
+            'id' => 'required',
         ]);
       
         $funcionario->update($request->all());
       
         return redirect()->route('funcionarios.index')
-                        ->with('success','Registro atualizado com sucesso.');
+                        ->with('success','Funcionário atualizado com sucesso.');
     }
 
     /**
@@ -140,7 +123,7 @@ class FuncionarioController extends Controller
         $funcionario->delete();
        
         return redirect()->route('funcionarios.index')
-                        ->with('success','Registro deletado com sucesso');
+                        ->with('success','Funcionário deletado com sucesso');
     }
    
 
