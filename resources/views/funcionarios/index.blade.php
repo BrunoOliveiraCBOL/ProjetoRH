@@ -19,7 +19,7 @@
                             $(function(){
                                 setTimeout(function() {
                                     $('.success').slideUp();
-                                }, 5000);
+                                }, 3000);
                             });
                         </script>
 
@@ -33,23 +33,23 @@
                     </div>
                     <br>
                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <form action="" method="GET">
-                            <input type="text" id="search" name="form-control" autocomplete="off" placeholder="Buscar Funcionário"class="font-bold py-2 px-4 rounded">
-                            <a href="{{ route('funcionarios.index') }}">
-                                <x-button type="submit" class="m-4">{{ __('Buscar') }}</x-button>
-                            </a>
+                        <form action="{{ route('funcionarios.search') }}" method="POST">
+                            @csrf
+                            <input type="text" id="search" name="search" autocomplete="off" placeholder="Busca"class="font-bold py-2 px-4 rounded">
+                            <x-button type="submit" class="m-4">{{ __('Buscar') }}</x-button>
                             <br> 
                             <small>Preencha com o nome completo ou matricula do funcionário.</small>
                             <br><br> 
                         </form>
                     </div>
 
-                    <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <table class="table-auto">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <table align="center" class="table-auto center">
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="border px-4 py-2" scope="col">Matricula</th>
                                     <th class="border px-4 py-2" scope="col">Nome</th>
+                                    <th class="border px-4 py-2" scope="col">Tipo de<br>Contratação</th>
                                     <th class="border px-4 py-2" scope="col">Cargo</th>
                                     <th class="border px-4 py-2" scope="col">Área</th>
                                     <th class="border px-4 py-2" width="360px">Ações</th>
@@ -60,6 +60,7 @@
                                     <tr>
                                         <td class="border px-4 py-2"> {{ $funcionario->id }}</td>
                                         <td class="border px-4 py-2"> {{ $funcionario->nome }}</td>
+                                        <td class="border px-4 py-2"> {{ $funcionario->tipo_contratacao }}</td>
                                         <td class="border px-4 py-2"> {{ $funcionario->cargo }}</td>
                                         <td class="border px-4 py-2"> {{ $funcionario->area }}</td>
                                         <td class="border px-4 py-2">
@@ -84,7 +85,11 @@
                             </tbody>
                         </table>
                         <br>
-                        {{ $funcionarios->links()}}
+                        @if (isset($filters))
+                            {{ $funcionarios->appends($filters)->links()}}
+                        @else
+                            {{ $funcionarios->links()}}
+                        @endif
                     </div>
                 </div>
             </div>

@@ -170,6 +170,11 @@
                                             <div class="px-4 py-5 bg-white sm:p-6">
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
+                                                        <label for="id" class="block text-sm font-medium text-gray-700">Matrícula</label>
+                                                        <input type="number" name="id" id="id" autocomplete="off" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    </div>
+                                                    <br>
+                                                    <div class="col-span-6 sm:col-span-3">
                                                         <label for="tipo_contratacao" class="block text-sm font-medium text-gray-700">Tipo de Contratação</label>
                                                         <select id="tipo_contratacao" name="tipo_contratacao" autocomplete="off" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                             <option value="">Selecione</option>
@@ -192,12 +197,12 @@
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="area" class="block text-sm font-medium text-gray-700">Área</label>
-                                                        <input type="text" name="area" id="cargo" autocomplete="off" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="text" name="area" id="area" autocomplete="off" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
                                                     <br>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="salario" class="block text-sm font-medium text-gray-700">Salário</label>
-                                                        <input type="text" name="salario" id="salario" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="0.00">
+                                                        <input type="text" name="salario" id="salario" size="12" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="0.00" onKeyUp="mascaraMoeda(this, event)">
                                                     </div>
                                                     <br>
                                                 </div>
@@ -238,6 +243,31 @@
                                     return r;
                                 }
                             </script>
+
+
+                                <script type="text/javascript">
+                                    String.prototype.reverse = function(){
+                                        return this.split('').reverse().join(''); 
+                                        };
+
+                                        function mascaraMoeda(campo,evento){
+                                            var tecla = (!evento) ? window.event.keyCode : evento.which;
+                                            var valor  =  campo.value.replace(/[^\d]+/gi,'').reverse();
+                                            var resultado  = "";
+                                            var mascara = "## ### ###.##".reverse();
+                                            for (var x=0, y=0; x<mascara.length && y<valor.length;) {
+                                                if (mascara.charAt(x) != '#') {
+                                                resultado += mascara.charAt(x);
+                                                x++;
+                                                } else {
+                                                resultado += valor.charAt(y);
+                                                y++;
+                                                x++;
+                                                }
+                                            }
+                                            campo.value = resultado.reverse();
+                                        }
+                                    </script>
 
 
 

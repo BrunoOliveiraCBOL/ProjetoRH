@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('funcionarios', FuncionarioController::class);
 
+Route::any('funcionarios/search', [FuncionarioController::class, 'search'])->name('funcionarios.search');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
