@@ -1,10 +1,21 @@
 <x-guest-layout>
     <x-auth-card>
-        <!--<x-slot name="logo">
-            <a href="/">
+        <x-slot name="logo">
+            <!-- <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot> -->
+            </a> -->
+            <style>
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+  
+                input[type=number] {
+                    -moz-appearance: textfield;
+                }
+            </style>
+        </x-slot>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -12,11 +23,19 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <!-- ID -->
+            <div>
+                <x-label for="id" :value="__('Matrícula')" />
+
+                <x-input id="id" class="block mt-1 w-full" type="number" name="id" :value="old('id')" required autofocus />
+            </div>
+            <br>
+
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Nome')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
             </div>
 
             <!-- Email Address -->
@@ -38,7 +57,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirme a Senha')" />
+                <x-label for="password_confirmation" :value="__('Confirme a senha')" />
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
@@ -51,7 +70,7 @@
                 </a>
 
                 <x-button class="ml-4">
-                    {{ __('Cadastrar') }}
+                    {{ __('Registrar') }}
                 </x-button>
             </div>
         </form>

@@ -33,21 +33,25 @@
                     </div>
                     <br>
                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <form action="{{ route('funcionarios.search') }}" method="POST">
-                            @csrf
-                            <input type="text" id="search" name="search" autocomplete="off" placeholder="Busca"class="font-bold py-2 px-4 rounded">
+                        <form action="{{ route('funcionarios.index') }}" method="GET">
+                            <input type="text" name="search" autocomplete="off" placeholder="Buscar"class="font-bold py-2 px-4 rounded">
                             <x-button type="submit" class="m-4">{{ __('Buscar') }}</x-button>
+                            
                             <br> 
-                            <small>Preencha com o nome completo ou matricula do funcionário.</small>
-                            <br><br> 
+                            <small>Preencha com o nome ou matricula do funcionário.</small>
+                            <br><br><br>
                         </form>
                     </div>
-
+                    
+                    <a href="{{ route('funcionarios.index') }}">
+                        <x-button type="submit" class="m-4">{{ __('Mostrar Tudo') }}</x-button>
+                    </a>
+                    <br><br>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <table align="center" class="table-auto center">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="border px-4 py-2" scope="col">Matricula</th>
+                                    <th class="border px-4 py-2br" scope="col">Matricula</th>
                                     <th class="border px-4 py-2" scope="col">Nome</th>
                                     <th class="border px-4 py-2" scope="col">Tipo de<br>Contratação</th>
                                     <th class="border px-4 py-2" scope="col">Cargo</th>
@@ -63,8 +67,8 @@
                                         <td class="border px-4 py-2"> {{ $funcionario->tipo_contratacao }}</td>
                                         <td class="border px-4 py-2"> {{ $funcionario->cargo }}</td>
                                         <td class="border px-4 py-2"> {{ $funcionario->area }}</td>
-                                        <td class="border px-4 py-2">
-
+                                        <td class="flex space-x-8 border px-4 py-2">
+                                           
                                             <a href="{{ route('funcionarios.show',$funcionario->id) }}">
                                                 <x-button type="submit" class="m-4">{{ __('Visualizar') }}</x-button>
                                             </a>
@@ -73,12 +77,12 @@
                                                 <x-button type="submit" class="m-4">{{ __('Editar') }}</x-button>
                                             </a>
 
-                                            <!-- Botão com funcão de deletar o registro, caso necessario
-                                            <form action="{{ route('funcionarios.destroy',$funcionario->id) }}" method="POST">
+                                            <!-- Botão com funcão de deletar o registro, caso necessario  -->
+                                            <form action="{{ route('funcionarios.destroy',$funcionario->id) }}" method="POST"> 
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-button type="submit" class="m-4">{{ __('Deletar') }}</x-button>
-                                            </form> -->
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

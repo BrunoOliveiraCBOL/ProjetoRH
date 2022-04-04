@@ -9,10 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white">
-                    
-                    <a href="{{ route('funcionarios.index') }}">
-                        <x-button type="submit" class="m-4">{{ __('Voltar') }}</x-button>
-                    </a>
+                     @can('user')
+                     <a href="{{ route('dashboard') }}">
+                            <x-button type="submit" class="m-4">{{ __('Voltar') }}</x-button>
+                        </a>
+                    @elsecan('admin')
+                        <a href="{{ route('funcionarios.index') }}">
+                            <x-button type="submit" class="m-4">{{ __('Voltar') }}</x-button>
+                        </a>
+                    @endcan
                     <br>
                     <br>
                     <!-- Exibição dos dados do funcionario -->
@@ -31,7 +36,7 @@
                                 <dt class="text-sm font-medium text-gray-500">Nome Completo</dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $funcionario->nome }}</dd>
                             </div>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt class="text-sm font-medium text-gray-500">Sexo</dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $funcionario->sexo }}</dd>
                             </div>
@@ -39,7 +44,7 @@
                                 <dt class="text-sm font-medium text-gray-500">Data de Nascimento</dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ date("d/m/Y",strtotime($funcionario->data_nascimento)) }}</dd>
                             </div>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt class="text-sm font-medium text-gray-500">Estado Civil</dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $funcionario->estado_civil }}</dd>
                             </div>

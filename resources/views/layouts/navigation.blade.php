@@ -19,13 +19,13 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('funcionarios.index')" :active="request()->routeIs('funcionarios.index')">
-                            {{ __('Funcionários') }}
+                        <x-nav-link :href="route('funcionarios.show', Auth::user()->id)" :active="request()->routeIs('funcionarios.*')">
+                            {{ __('Meus Dados') }}
                         </x-nav-link>
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('holerites.index')" :active="request()->routeIs('holerites.*')">
                             {{ __('Holerites') }}
                         </x-nav-link>
                     </div>
@@ -43,13 +43,13 @@
                     </div>
                    
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('funcionarios.index')" :active="request()->routeIs('funcionarios.index')">
+                        <x-nav-link :href="route('funcionarios.index')" :active="request()->routeIs('funcionarios.*')">
                             {{ __('Funcionários') }}
                         </x-nav-link>
                     </div>
                     
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('holerites.store')" :active="request()->routeIs('holerites.*')">
                             {{ __('Holerites') }}
                         </x-nav-link>
                     </div>

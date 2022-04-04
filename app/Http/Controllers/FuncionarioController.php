@@ -12,14 +12,18 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
+        
+        $search = $request->search;
+        $funcionarios = Funcionario::where(function ($query) use ($search) {
+            if($search){
+                $query->where('nome', 'LIKE', "%{$search}%");
+                $query->orWhere('id', $search);
+            }
+        })->paginate(5);
 
-
-        $funcionarios = Funcionario::oldest()->paginate(20);
-
-        return view('funcionarios.index',compact('funcionarios'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('funcionarios.index',compact('funcionarios'));
     }
 
 
@@ -81,6 +85,7 @@ class FuncionarioController extends Controller
      */
     public function show(Funcionario $funcionario)
     {
+        
         return view('funcionarios.show',compact('funcionario'));
     }
 
@@ -129,18 +134,6 @@ class FuncionarioController extends Controller
                         ->with('success','Funcionário deletado com sucesso');
     }
    
-    public function search(Request $request)
-    {   
-
-        $filters = $request->except('token');
-
-        $funcionarios = Funcionario::where('id','LIKE',"%{ $request->search }%")
-                                         ->orWhere('nome','LIKE',"%{ $request->search }%")
-                                         ->paginate();
-
-        return view('funcionarios.index',compact('funcionarios', 'filters'));
-    }
-
 
 }
 

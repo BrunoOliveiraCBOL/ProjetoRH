@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\FuncionarioController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::resource('funcionarios', FuncionarioController::class);
-
-Route::any('funcionarios/search', [FuncionarioController::class, 'search'])->name('funcionarios.search');
-
+Route::resource('holerites', FileController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
 
 require __DIR__.'/auth.php';
