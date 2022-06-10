@@ -20,20 +20,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white">
-                    @can('user')
+                    
 
-                    @if (session('success'))
-                        <p class="success">{{ session('success') }}</p><br>
-
-                        <script>
-                            $(function(){
-                                setTimeout(function() {
-                                    $('.success').slideUp();
-                                }, 3000);
-                            });
-                        </script>
-
-                    @endif
+                @unlessrole('admin')
+                    @if(auth()->user()->can('visualizar_holerite'))                  
 
                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                         <form action="{{ route('holerites.index') }}" method="GET">
@@ -57,12 +47,16 @@
                                 @foreach ($holerites as $holerite)
                                     @if($holerite->id_matricula == Auth::user()->id)
                                         <tr>
-                                            <td class="border px-4 py-2"> {{ $holerite->mes_referente }}</td>
+                                            <td class="border px-4 py-2"> {{ date("m/Y",strtotime($holerite->mes_referente)) }}</td>
                                             <td class="flex space-x-8 border px-4 py-2">
-                                           
-                                                <a href="{{ route('holerites.index',$holerite->id) }}">
-                                                    <x-button type="submit" class="m-4">{{ __('Baixar Holerite') }}</x-button>
-                                                </a>
+
+                                                @if($holerite->file != 'null')
+                                                    <a href="{{ route('download', $holerite->id) }}">
+                                                        <x-button type="submit" class="m-4">{{ __('Baixar Holerite') }}</x-button>
+                                                    </a>
+                                                @else
+                                                    Você não possui holerites para consulta.
+                                                @endif
                                             </td>
                                         </tr>
                                     @endif
@@ -76,8 +70,11 @@
                             {{ $holerites->links()}}
                         @endif
                     </div>
+                    @endif
+                @endunlessrole
 
-                    @elsecan('admin')
+
+                    @if(auth()->user()->can('criar_holerite'))
                     
                         @if (session('success'))
                             <p class="success">{{ session('success') }}</p><br>
@@ -125,17 +122,76 @@
                                                         <label for="file" class="block text-sm font-medium text-gray-700">Holerite</label>
                                                         <input type="file" name="file" id="file" autocomplete="off" class="mr-64 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
-                                                    <br>
                                                 </div>
-                                            </div>                                    
+                                            </div>
+                                            <x-button type="submit" class="m-4">{{ __('Upload') }}</x-button>                                   
                                         </div>  
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <x-button type="submit" class="m-4">{{ __('Upload') }}</x-button>               
+                                          
                         </form>
-                    @endcan
+                        <br>
+                        <div class="border-t border-gray-200">
+                        <br>
+                    @endif
+                    @if(auth()->user()->can('visualizar_holerite'))
+                                    
+                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                            <form action="{{ route('holerites.index') }}" method="GET">
+                                <input type="text" name="search" autocomplete="off" placeholder="Buscar"class="font-bold py-2 px-4 rounded">
+                                <x-button type="submit" class="m-4">{{ __('Buscar') }}</x-button>
+                                <br>
+                                <small>Busque pela matrícula do funcionário.</small>
+                                <br>
+
+                            </form>
+                        </div>
+                        
+                        <a href="{{ route('holerites.index') }}">
+                            <x-button type="submit" class="m-4">{{ __('Mostrar Tudo') }}</x-button>
+                        </a>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <table align="center" class="table-auto center">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="border px-4 py-2br" scope="col">Matrícula</th>
+                                            <th class="border px-4 py-2br" scope="col">Mês Referente</th>
+                                            <th class="border px-4 py-2" scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($holerites as $holerite)
+                                                <tr>
+                                                    <td class="border px-4 py-2"> {{ $holerite->id_matricula }}</td>
+                                                    <td class="border px-4 py-2"> {{ date("m/Y",strtotime($holerite->mes_referente)) }}</td>
+                                                    <td class="flex space-x-8 border px-4 py-2">
+
+                                                        <a href="{{ route('download', $holerite->id) }}">
+                                                            <x-button type="submit" class="m-4">{{ __('Baixar Holerite') }}</x-button>
+                                                        </a>
+
+                                                        <!-- Botão com funcão de deletar o registro, caso necessario  -->
+                                                        <form action="{{ route('holerites.destroy',$holerite->id) }}" method="POST"> 
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <x-button type="submit" class="m-4">{{ __('Deletar') }}</x-button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <br>
+                                @if (isset($filters))
+                                    {{ $holerites->appends($filters)->links()}}
+                                @else
+                                    {{ $holerites->links()}}
+                                @endif
+                            </div>
+                        </div>
+                             
+                    @endif
                 </div>
             </div>
         </div>

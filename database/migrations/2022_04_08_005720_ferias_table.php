@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+
+
+        Schema::create('ferias', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_matricula');
+            $table->string('data_inicio');
+            $table->integer('dias_ferias');
+            $table->string('status')->default('Em Análise');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 };

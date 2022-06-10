@@ -23,14 +23,6 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- ID -->
-            <div>
-                <x-label for="id" :value="__('Matrícula')" />
-
-                <x-input id="id" class="block mt-1 w-full" type="number" name="id" :value="old('id')" required autofocus />
-            </div>
-            <br>
-
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Nome')" />

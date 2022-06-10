@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\FeriasController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -27,15 +31,17 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
-    
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
-
+            
     Route::post('register', [RegisteredUserController::class, 'store']);
-
+    
 });
 
 Route::middleware('auth')->group(function () {
+
+    
 
 
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
@@ -56,4 +62,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+    Route::resource('funcionarios', FuncionarioController::class);
+    
+    Route::resource('holerites', FileController::class);
+                
+    Route::resource('ferias', FeriasController::class);
+                            
+    Route::get('holerites/download/{id}', [DownloadController::class, 'download'])
+                ->name('download');
+                
 });

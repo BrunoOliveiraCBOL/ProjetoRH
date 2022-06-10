@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Holerite;
-use App\Models\Funcionario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -14,6 +14,7 @@ class FileController extends Controller
         $holerites = Holerite::where(function ($query) use ($search) {
             if($search){
                 $query->Where('mes_referente', $search);
+                $query->orWhere('id_matricula', $search);
             }
         })->paginate(20);
         return view('holerites.index',compact('holerites'));
@@ -33,24 +34,30 @@ class FileController extends Controller
             'mes_referente' => 'required',
             'file' => 'required|mimes:pdf|max:2048',
         ]);
-    
-        $fileName = time().'.'.$request->file->extension();  
-     
-        $request->file->move(public_path('uploads'), $fileName);
-   
-        Holerite::create($request->all());
-     
-        return redirect()->route('holerites.index')
-            ->with('success','Upload de Holerite efetuado com sucesso.')
-            ->with('file', $fileName);
-
-    }
-
-    public function show(Holerite $holerite)
-    {
         
-        return view('holerites.show',compact('holerite'));
+        $data = $request->all();
+
+            if($request->file->isValid()){
+
+                $file = $request->file->store('holerites');
+                $data['file'] = $file;
+            }
+
+        
+        Holerite::create($data);
+        
+        return redirect()->route('holerites.index')
+            ->with('success','Upload efetuado com sucesso.');
+
     }
-
-
+    
+    
+    public function destroy(Holerite $holerite)
+    {
+        $holerite->delete();
+        Storage::delete($holerite->file);
+       
+        return redirect()->route('holerites.index')
+                        ->with('success','Holerite deletado com sucesso');
+    }
 }

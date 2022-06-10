@@ -11,7 +11,7 @@
                 </div> -->
 
                 <!-- Navigation Links -->
-                @can('user')
+                @unlessrole('admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Home') }}
@@ -31,11 +31,11 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('ferias.index')" :active="request()->routeIs('ferias.*')">
                             {{ __('Férias') }}
                         </x-nav-link>
                     </div>
-                @elsecan('admin')
+                @else
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Home') }}
@@ -43,8 +43,14 @@
                     </div>
                    
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+                            {{ __('Grupos e Permissões') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('funcionarios.index')" :active="request()->routeIs('funcionarios.*')">
-                            {{ __('Funcionários') }}
+                            {{ __('Colaboradores') }}
                         </x-nav-link>
                     </div>
                     
@@ -55,19 +61,11 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('ferias.index')" :active="request()->routeIs('ferias.*')">
                             {{ __('Férias') }}
                         </x-nav-link>
                     </div>
-
-                        @if (Route::has('register'))
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <x-nav-link :href="route('register')">
-                                    {{ __('Novo Usuário') }}
-                                </x-nav-link>
-                            </div>
-                        @endif
-                @endcan
+                @endunlessrole
             </div>
 
             <!-- Settings Dropdown -->

@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class FuncionarioController extends Controller
 {
@@ -21,7 +29,7 @@ class FuncionarioController extends Controller
                 $query->where('nome', 'LIKE', "%{$search}%");
                 $query->orWhere('id', $search);
             }
-        })->paginate(5);
+        })->paginate(20);
 
         return view('funcionarios.index',compact('funcionarios'));
     }
@@ -35,7 +43,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionarios.create');
+        return view('funcionarios.create');        
     }
 
     
@@ -70,11 +78,31 @@ class FuncionarioController extends Controller
             'salario' => 'required',
              
         ]);
-      
+        
+        
         Funcionario::create($request->all());
+        
+        //Parte de cadastrar o usuario
+
+        $grupo = $request->grupo;
+
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'id' => $request->id,
+            'name' => $request->nome,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ])->assignRole($grupo);
+
+
+        event(new Registered($user));
+        
        
         return redirect()->route('funcionarios.index')
-                        ->with('success','Funcionário cadastrado com Sucesso.');
+                        ->with('success','Colaborador cadastrado com Sucesso.');
     }
 
     /**
@@ -85,7 +113,6 @@ class FuncionarioController extends Controller
      */
     public function show(Funcionario $funcionario)
     {
-        
         return view('funcionarios.show',compact('funcionario'));
     }
 
@@ -117,7 +144,7 @@ class FuncionarioController extends Controller
         $funcionario->update($request->all());
       
         return redirect()->route('funcionarios.index')
-                        ->with('success','Funcionário atualizado com sucesso.');
+                        ->with('success','Colaborador atualizado com sucesso.');
     }
 
     /**
@@ -128,10 +155,13 @@ class FuncionarioController extends Controller
      */
     public function destroy(Funcionario $funcionario)
     {
+
+        $id = $funcionario->id;
         $funcionario->delete();
-       
+        DB::delete('DELETE FROM users WHERE id = ?', [$id]);
+        
         return redirect()->route('funcionarios.index')
-                        ->with('success','Funcionário deletado com sucesso');
+                        ->with('success','Colaborador deletado com sucesso');
     }
    
 
