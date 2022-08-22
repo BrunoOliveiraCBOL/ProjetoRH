@@ -96,7 +96,8 @@ class FuncionarioController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ])->assignRole($grupo);
-
+        
+        $user->assignRole('user');
 
         event(new Registered($user));
         
@@ -164,6 +165,18 @@ class FuncionarioController extends Controller
                         ->with('success','Colaborador deletado com sucesso');
     }
    
+    public function reset(Funcionario $funcionario)
+    {
+        $id = $funcionario->id;
+        $password = Hash::make('123456789');
+      
+        DB::table('users')->where('user_id',$id)->update(array(
+                                                    'password'=>$password,
+        ));
+      
+        return redirect()->route('funcionarios.index')
+                        ->with('success','Senha resetada com sucesso.');
+    }
 
 }
 

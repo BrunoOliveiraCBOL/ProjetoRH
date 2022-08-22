@@ -135,7 +135,8 @@
                         <div class="border-t border-gray-200">
                         <br>
                     @endif
-                    @if(auth()->user()->can('visualizar_holerite'))
+                    
+                    @if(auth()->user()->can('criar_holerite'))
                                     
                         <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                             <form action="{{ route('holerites.index') }}" method="GET">

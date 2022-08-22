@@ -42,17 +42,18 @@
                                             
                                             <td class="flex space-x-8 border px-4 py-2">
                                             
+                                                @if($role->name != 'admin' &&  $role->name != 'user')
+                                                    <a href="{{ route('roles.edit',$role->id) }}">
+                                                        <x-button type="submit" class="m-4">{{ __('Editar Permissões') }}</x-button>
+                                                    </a>
 
-                                                <a href="{{ route('roles.edit',$role->id) }}">
-                                                    <x-button type="submit" class="m-4">{{ __('Editar Permissões') }}</x-button>
-                                                </a>
-
-                                                <!-- Botão com funcão de deletar o registro, caso necessario  -->
-                                                <form action="{{ route('roles.destroy',$role->id) }}" method="POST"> 
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-button type="submit" class="m-4">{{ __('Deletar') }}</x-button>
-                                                </form>
+                                                    <!-- Botão com funcão de deletar o registro, caso necessario  -->
+                                                    <form action="{{ route('roles.destroy',$role->id) }}" method="POST"> 
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-button type="submit" class="m-4">{{ __('Deletar') }}</x-button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

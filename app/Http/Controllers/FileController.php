@@ -6,6 +6,7 @@ use App\Models\Holerite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class FileController extends Controller
 {
     public function index(Request $request)
@@ -30,7 +31,6 @@ class FileController extends Controller
     {
         $request->validate([
 
-            'id_matricula' => 'required',
             'mes_referente' => 'required',
             'file' => 'required|mimes:pdf|max:2048',
         ]);
@@ -39,11 +39,13 @@ class FileController extends Controller
 
             if($request->file->isValid()){
 
-                $file = $request->file->store('holerites');
+                $file = $request->file->store('first');
                 $data['file'] = $file;
             }
 
         
+
+
         Holerite::create($data);
         
         return redirect()->route('holerites.index')

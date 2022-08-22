@@ -5,6 +5,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\FeriasController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,10 @@ Route::resource('roles', RoleController::class);
 
 Route::get('holerites/download/{id}', [DownloadController::class, 'download'])
                 ->name('download');
+
+
+Route::get('funcionarios/reset/{id}', [ResetController::class, 'reset'])
+                ->name('reset');
 
 
 Route::get('/dashboard', function () {

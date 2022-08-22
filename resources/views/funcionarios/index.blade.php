@@ -90,6 +90,12 @@
                                                         <x-button type="submit" class="m-4">{{ __('Deletar') }}</x-button>
                                                     </form>
                                                 @endif
+                                                @if(auth()->user()->can('editar_colaborador'))
+                                                <a href="{{ route('reset',$funcionario->id) }}" method="POST">
+                                                        <x-button type="submit" class="m-4">{{ __('Resetar Senha') }}</x-button>
+                                                    </a>
+                                                @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
